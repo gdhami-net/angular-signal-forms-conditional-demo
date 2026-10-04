@@ -22,7 +22,7 @@ Angular 22.2.1, `@angular/forms` 22.2.1, TypeScript 6.0.3, Vitest 5.0.3 through
 `hidden` is attached to the `shipping` group, so the children inherit it:
 
 ```ts
-hidden(path.shipping, ({ valueOf }) => !valueOf(path.shipToDifferentAddress));
+hidden(path.shipping, { when: ({ valueOf }) => !valueOf(path.shipToDifferentAddress) });
 required(path.shipping.line1, { message: 'Street is required' });
 required(path.shipping.city, { message: 'City is required' });
 ```

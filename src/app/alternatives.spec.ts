@@ -8,7 +8,7 @@ import { Checkout, emptyCheckout } from './checkout';
 
 const disabledSchema = schema<Checkout>((path) => {
   required(path.email);
-  disabled(path.shipping, ({ valueOf }) => !valueOf(path.shipToDifferentAddress));
+  disabled(path.shipping, { when: ({ valueOf }) => !valueOf(path.shipToDifferentAddress) });
   required(path.shipping.line1);
   required(path.shipping.city);
 });
@@ -61,7 +61,7 @@ describe('readonly instead of hidden', () => {
   it('also skips the required rule', () => {
     const readonlySchema = schema<Checkout>((path) => {
       required(path.email);
-      readonly(path.shipping, ({ valueOf }) => !valueOf(path.shipToDifferentAddress));
+      readonly(path.shipping, { when: ({ valueOf }) => !valueOf(path.shipToDifferentAddress) });
       required(path.shipping.line1);
       required(path.shipping.city);
     });

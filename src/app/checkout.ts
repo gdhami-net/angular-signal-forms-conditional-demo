@@ -31,7 +31,7 @@ export const checkoutSchema = schema<Checkout>((path) => {
   required(path.email, { message: 'Email is required' });
   email(path.email, { message: 'Email looks wrong' });
 
-  hidden(path.shipping, ({ valueOf }) => !valueOf(path.shipToDifferentAddress));
+  hidden(path.shipping, { when: ({ valueOf }) => !valueOf(path.shipToDifferentAddress) });
 
   required(path.shipping.line1, { message: 'Street is required' });
   required(path.shipping.city, { message: 'City is required' });
